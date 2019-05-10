@@ -17,17 +17,27 @@
 void child_process(uint64_t number);
 int get_free_process_index(int pids[]);
 int is_prime_number(uint64_t number);
-void get_input(uint64_t inputs[], int* number_of_inputs);
+void get_inputs(uint64_t inputs[], int* number_of_inputs);
 
 int main() {
 
-    uint64_t inputs[] = {11, 17, 31, 19, 29, 37};    
-    int number_of_inputs = 6;
+    uint64_t inputs[30];
+    int number_of_inputs;
     
     pid_t pids[] = {0, 0, 0}; // processes (parent and 3 children)
     int free_process_index;
     uint64_t current_input;
     
+    get_inputs(inputs, &number_of_inputs);
+    
+        
+    printf("[");
+    for (int i = 0; i < number_of_inputs; i++) {
+        printf("%lu, ", inputs[i]);
+    }
+    printf("]\n número de entradas: %d\n", number_of_inputs);
+    
+    return 0;
     
     for (int input_index = 0; input_index < number_of_inputs; input_index++ ) {
         
@@ -136,13 +146,16 @@ int is_prime_number(uint64_t number) {
     return is_prime;
 }
 
-void get_input(uint64_t inputs[], int* number_of_inputs) {
+void get_inputs(uint64_t inputs[], int* number_of_inputs) {
     
-    uint64_t input; 
+    uint64_t input;
+    int index = 0;
+    
     while (scanf("%lu", &input) != EOF) {
-        // malloc mais um numero
-        // incrementa contador
+        inputs[index] = input;
+        index++;
     }
+    *number_of_inputs = index;
 }
 
 
